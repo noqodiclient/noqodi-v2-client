@@ -1,0 +1,22 @@
+{
+  "name": "noqodi-v2-api-client",
+  "version": "1.0.0",
+  "description": "noqodi V2 API demo client applicaiton / reference implementation",
+  "main": "noqodi-core.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "webpack --mode development --watch",
+    "build": "webpack --mode production"
+  },
+  "author": "Dornubari Ngbor",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
+    "babel-loader": "^8.0.6",
+    "lodash-es": "^4.17.11",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5"
+  }
+}

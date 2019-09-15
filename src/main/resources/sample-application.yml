@@ -1,0 +1,80 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: local-tomcat
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.web.client: DEBUG
+
+demo-ewb-app:
+  credentials:
+    username: admin
+    password: secret
+  noqodi-ready-data: noqodi ready
+  api-base-path: /api
+
+noqodi:
+  v2:
+    api:
+      endpoints:
+        oauth-uris:
+          password-uri: /oauth/token/password
+          client-credentials-uri: /oauth/token/client-credentials
+        payment-uris:
+          pre-auth-uri: /v2/payments/preAuth
+          void-auth-uri: /v2/payments/voidAuth
+          capture-uri: /v2/payments/capture
+          complete-uri: /v2/payments/complete
+          xpress-uri: /v2/payments/xpress
+        balances-uris:
+          merchant-uri: /v2/balances
+          merchant-beneficiaries-uri: /v2/balances
+          customer-wallet-uri: /v2/balances
+        refunds-uris:
+          refunds-uri: /v2/refunds
+          complete-refunds-uri: /v2/refunds/complete
+        payouts-uris:
+          payouts-uri: /v2/payouts
+
+---
+spring:
+  profiles: local-tomcat
+
+demo-ewb-app:
+  noqodi-payment-page: https://merchantpayment-dem01.noqodi.com/pz/web/multiPayment/multiZonePage?paymentRequestToken=
+  noqodi-payment-page-origin: https://merchantpayment-dem01.noqodi.com
+  callback-url: http://localhost:8080/callback
+  app-base-url: http://localhost:8080
+
+noqodi:
+  v2:
+    api:
+      credentials:
+        client-id: YOUR-CLEINT-ID-HERE
+        client-secret: YOUR-CLEINT-SECRET-HERE
+        users:
+          - username: admin_user@example.com
+            password: secret
+            role: ROLE_ADMIN
+          - username: another_user@example.com
+            password: secret
+            role: ROLE_USER
+      base-url: https://apigee-dem01.noqodi.com
+      test-data:
+        balance-merchant-code: ASK-NOQODI-TEAM
+        balance-merchant-beneficiaries: ASK-NOQODI-TEAM,ASK-NOQODI-TEAM
+        customer-wallet: ASK-NOQODI-TEAM
+        payment-merchant-code: ASK-NOQODI-TEAM
+        payment-merchant-beneficiaries: ASK-NOQODI-TEAM,ASK-NOQODI-TEAM
+        payouts-parent-merchant-code: ASK-NOQODI-TEAM
+        payouts-child-merchant-code: ASK-NOQODI-TEAM
+        payouts-merchant-beneficiaries: ASK-NOQODI-TEAM,ASK-NOQODI-TEAM
+
+

@@ -1,0 +1,369 @@
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: monospace, Verdana, Geneva, sans-serif;
+    font-size: 14px;
+}
+
+div.main-content-container-div {
+    min-height: 100vh;
+    height: auto !important;
+    padding: 0;
+    margin: 0;
+}
+
+div.footer {
+    height: 40px;
+    width: 100%;
+    border-top: 1px solid #f2f2f2;
+}
+
+
+nav.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+div.navbar-nav a.active {
+    border-bottom: 1px solid red;
+    font-weight: bolder !important;
+}
+
+div.nav-pills a.nav-link {
+    text-decoration: none;
+    color: #5a6a76 !important;
+    height: 130px;
+    background-color: white !important;
+    margin: 0 0 4px 0;
+    border-top: 1px solid #f8f9fa;
+    border-bottom: 1px solid #f8f9fa;
+    border-left: 50px solid #dee4e9;
+    border-right: 2px solid #dee4e9;
+}
+
+div.nav-pills>a.active, div.nav-pills>a.active:focus, div.nav-pills>a.active:hover {
+    border-left: 50px solid #5a6a76;
+    border-right: 2px solid red;
+}
+
+div.nav-pills>a:hover {
+    border-left: 50px solid #dee4e9;
+    border-right: 2px solid #aac8df;
+}
+
+div.nav-pills>a>h4, div.nav-pills>a>p {
+    margin: 0;
+    padding: 0;
+}
+
+div.nav-pills>a>h4 {
+    color: darkslategray;
+}
+
+div.nav-pills>a>p {
+    color: #557a9a;
+}
+
+
+div.index-wrap-div {
+    background:
+            linear-gradient(
+                    rgba(255, 255, 255, 0.7),
+                    rgba(255, 255, 255, 0.7)
+            ),
+                /*url("../images/noqodi-mac-coffee.jpg");*/
+            url("../images/noqodi-v2-ref-bg.jpg");*
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+
+/*div.emaratech-brand-div {*/
+/*!*background:*!*/
+/*!*linear-gradient(*!*/
+/*!*rgba(170, 235, 255, 0.1),*!*/
+/*!*rgba(255, 255, 255, 0.95)*!*/
+/*!*),*!*/
+/*!*url("../images/emaratech-brand-bw.jpg");*!*/
+/*background: url("../images/emaratech-brand-bw.jpg");*/
+/*background-attachment: fixed;*/
+/*background-position: top;*/
+/*background-repeat: no-repeat;*/
+/*background-size:cover;*/
+/*width: 100%;*/
+/*!*background: white;*!*/
+/*}*/
+
+
+div#payment-commands-container, div.emaratech-brand-div {
+    background:
+            linear-gradient(
+                    rgba(170, 235, 255, 0.1),
+                    rgba(255, 255, 255, 1)
+            );
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+div.balance-command-carousel-div {
+    background:
+            linear-gradient(
+                    rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)
+            ),
+            url("../images/noqodi-mac-coffee.jpg");
+            /*url("../images/noqodi-v2-ref-bg.jpg");**/
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+hr.home-divider {
+    display: block; height: 1px;
+    border: 0; border-top: 1px solid lightcoral;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.index-text-shadow {
+    text-shadow: gray 1px 1px 1px;
+}
+
+div.btn-group.btn-group-block {
+    display: flex;
+}
+
+p.command-result-text {
+    padding: 20px;
+    page-break-inside: avoid;
+    border: 1px solid #eee;
+    border-left: 5px solid lightsteelblue;
+    word-wrap: break-word;
+    overflow: auto;
+    color: green;
+    font-weight: lighter;
+    font-size: 14px;
+}
+
+div.trace-element-div {
+    padding: 5px;
+    width: 150px;
+}
+
+div.trace-element-arrow-div {
+    padding: 5px;
+}
+
+fieldset.trace-fieldset {
+    height: 210px;
+    padding: 0 20px;
+}
+
+button.animated-trace-element {
+    transition-property: background, border;
+    transition-duration: 1s;
+    -webkit-transition-property: background, border;
+    -webkit-transition-duration: 1s;
+}
+
+
+@media only screen and (max-width: 600px) {
+    h1#api-group-header-text {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 767px) {
+    h1#api-group-header-text {
+        font-size: 35px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    h1#api-group-header-text {
+        font-size: 40px;
+    }
+}
+
+i#item-1-amount-edit, i#item-2-amount-edit, #update-item-amount-button, #cancel-update-item-amount-button {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+div.amount-editor-popover {
+    width: 270px !important;
+    min-width: 200px;
+    max-width: 300px;
+}
+
+
+
+/*login style*/
+
+div.login-page-container {
+    height: 100%;
+    width: 100%;
+    background-color: #0585c8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5000;
+    visibility: visible;
+    display: none;
+}
+
+div.login-form-container {
+    border: 1px solid rgba(135, 206, 250, 0.4);
+    background-color: white;
+    width: 380px;
+    padding: 50px 25px;
+}
+
+h3.login-form-title {
+    color: #0585c8;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+
+input.login-form-input {
+    border: none !important;
+    background-color: white;
+    color: #0585c8;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+input.login-form-input:focus {
+    outline:0 !important;
+}
+
+fieldset.login-form-input-fieldset {
+    padding: 5px 20px 10px 20px;
+    border: 1px solid lightskyblue;
+    border-radius: 3px;
+    background-color: white;
+}
+
+legend.login-form-input-legend {
+    font-size: 16px;
+    font-weight: lighter;
+    color: darkgrey;
+}
+
+input.login-form-input::-webkit-input-placeholder { /* Edge */
+    font-weight: lighter;
+    color: lightblue;
+}
+
+input.login-form-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-weight: lighter;
+    color: lightblue;
+}
+
+input.login-form-input::placeholder {
+    font-weight: lighter;
+    color: lightblue;
+}
+
+button.login-button,
+button.login-button:focus,
+button.login-button:hover,
+button.login-button:active,
+button.login-button:visited {
+    background-color: #0585c8 !important;
+}
+
+
+button.login-button {
+    border-radius: 0;
+}
+
+
+/*login style*/
+
+
+
+div.refund-tab-content > div.tab-pane, div.payout-tab-content > div.tab-pane  {
+    border-left:solid 1px #dee4e9;
+    border-right:solid 1px #dee4e9;
+    border-bottom:solid 1px #dee4e9;
+    padding: 20px;
+    background-color:#fff;
+}
+
+
+nav#refund-nav-pills a, nav#payout-nav-pills a {
+    background-color: #fafafa !important;
+    color: grey !important;
+}
+
+
+nav#refund-nav-pills a.active, nav#payout-nav-pills a.active {
+    border-bottom: 5px solid grey;
+    background-color: #dee4e9 !important;
+    color: grey !important;
+}
+
+
+
+
+
+
+div.void-capture-overlay-div {
+    display: none;
+    position: fixed;
+    background: rgba(134, 134, 134, 0.25);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5000;
+}
+
+div.void-capture-button-group {
+    width: 300px;
+}
+
+
+div.void-capture-button-group .btn {
+    width: 50%;
+}
+
+div.void-capture-dialog {
+    border: 2px solid #c1c1c1;
+    border-radius: 10px;
+    width: 400px;
+}
+
+
+
+
+
+
