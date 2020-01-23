@@ -89,7 +89,9 @@ class PaymentLoadIframeCommandHandler {
         }.bind(this);
 
         this.noqodiAuthResponse = function (event) {
-            if (event.origin === configuration.noqodiPaymentPageOrigin && event.source === noqodiPaymentIFrameContentWindow) {
+            let authResponseModel=JSON.parse(event.data);
+            paymentCommands.paymentAuthResponseCommand.execute(authResponseModel);
+/*            if (event.origin === configuration.noqodiPaymentPageOrigin && event.source === noqodiPaymentIFrameContentWindow) {
                 let decodedEventData = decodeURIComponent(event.data);
                 let indexOfAuthResponse = decodedEventData.indexOf("response=");
                 let indexOfCallbackUrl = decodedEventData.indexOf("?response=");
@@ -112,7 +114,7 @@ class PaymentLoadIframeCommandHandler {
                         paymentCommands.paymentAuthResponseCommand.execute(authResponseModel);
                     }
                 }
-            }
+            }*/
         }.bind(this);
     }
 

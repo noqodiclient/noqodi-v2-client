@@ -9,6 +9,11 @@
 
 <div class="index-wrap-div">
     <%--welcome--%>
+        <a href="#" onclick="window.open('https://www-dem01.noqodi.com/merchant/login')">
+            <h3>
+                <b class="mr-2 btn-round-corner">&nbsp;Merchant Login</b>
+            </h3>
+        </a>
     <div id="index-welcome-div" class="fade-onload justify-content-center align-items-center py-5"
          style="display: none">
         <div class="d-flex justify-content-center align-items-center flex-column">

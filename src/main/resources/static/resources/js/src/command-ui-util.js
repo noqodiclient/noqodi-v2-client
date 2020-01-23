@@ -187,7 +187,7 @@ export class BeneficiaryBalanceCommandHandlerForPayout {
     }
 
     successHandler(commandResponse) {
-        if (Helper.isCommandResponseSuccess(commandResponse)) {
+         /*if (Helper.isCommandResponseSuccess(commandResponse)) {
             let beneOneBalance = commandResponse.response.merchantInquiryInfo.beneficiaries[0].beneCurrentBalance.toFixed(2);
             let beneTwoBalance = commandResponse.response.merchantInquiryInfo.beneficiaries[1].beneCurrentBalance.toFixed(2);
             previousBeneficiaryPayout.beneficiaryOneBalance = beneOneBalance;
@@ -204,7 +204,7 @@ export class BeneficiaryBalanceCommandHandlerForPayout {
             $('#bene-two-account-number').text(beneTwoAccount);
             $('#bene-two-current-balance').text('AED ' + beneTwoBalance);
             ItemAmountManager.updateItemAmount(beneTwoBalance, "beneficiaryTwoAmount");
-        }
+        }*/
     }
 
     errorHandler() {

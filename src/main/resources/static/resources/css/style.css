@@ -362,7 +362,33 @@ div.void-capture-dialog {
     width: 400px;
 }
 
+/*Button styles*/
+  .btn-round-corner {
+      font-family: arial, helvetica, sans-serif;
+      padding: 0 20px;
+      height: 35px;
+      font-size: 16px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 25px;
+      background-color: #337ab7;
+      margin-left: 1035px;
+      color: white;
+  }
 
+.btn-round-corner:hover {
+    background-color: #57626f;
+    color: white;
+}
+
+.btn-round-corner:focus {
+    outline:0;
+}
+
+.btn-round-corner-active {
+    background-color: #4F81BD;
+    color: white;
+}
 
 
 
