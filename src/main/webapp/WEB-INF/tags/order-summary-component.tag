@@ -49,7 +49,8 @@
         <div class="btn-group" role="group" aria-label="execute payment or go back to main commands">
             <a class="btn btn-light" href="${contextPath}/web/commands"><i class="fas fa-arrow-circle-left"></i>&nbsp;&nbsp;Go
                 back</a>
-            <button id="proceed-to-payment-button" class="btn btn-info">Proceed to Payment</button>
+            <button id="proceed-to-payment-button" class="btn btn-info ml-1">Pay via iFrame</button>
+            <button id="proceed-to-hosted-payment-button" class="btn btn-primary ml-1">Pay via Hosted Page</button>
         </div>
     </div>
 </div>

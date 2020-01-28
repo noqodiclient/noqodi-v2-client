@@ -7,6 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 @Controller
 public class WebController {
 
@@ -33,16 +37,22 @@ public class WebController {
     }
 
     @RequestMapping("/web/payment")
-    public String payment(ModelMap  model) {
-//        String apiBasePath = contextPath == null ? configuration.getApiBasePath() : contextPath + configuration.getApiBasePath();
+    public String payment(ModelMap model, HttpServletRequest request) throws UnsupportedEncodingException {
+        //        String apiBasePath = contextPath == null ? configuration.getApiBasePath() : contextPath + configuration.getApiBasePath();
         model.addAttribute("noqodiPaymentPage", configuration.getNoqodiPaymentPage());
         model.addAttribute("noqodiPaymentPageOrigin", configuration.getNoqodiPaymentPageOrigin());
         model.addAttribute("callbackUrl", configuration.getCallbackUrl());
-        model.addAttribute("noqodiReadyData", configuration.getNoqodiReadyData());
+        model.addAttribute("noqodiReadyData", getReadyData(request.getParameter("paymentResult")));
         model.addAttribute("contextPath", contextPath);
         model.addAttribute("apiBasePath", configuration.getApiBasePath());
         model.addAttribute("appBaseUrl", configuration.getAppBaseUrl());
         return "payment";
+    }
+
+    private String getReadyData(String param) throws UnsupportedEncodingException {
+        if (null != param)
+            return URLEncoder.encode(param, "UTF-8");
+        return configuration.getNoqodiReadyData();
     }
 
     @RequestMapping("/web/iframe-test")

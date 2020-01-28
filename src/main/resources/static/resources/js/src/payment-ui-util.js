@@ -1,5 +1,3 @@
-
-
 import {
     configuration,
     beneficiaryAmount,
@@ -20,10 +18,11 @@ import {
 
 class PaymentPreAuthCommandHandler {
 
-    constructor(commandButton, traceElement) {
+    constructor(commandButton, traceElement, isHostedPayment) {
         this.commandButton = commandButton;
         this.traceElement = traceElement;
         this.testIframeUrl = 'http://localhost:8080/web/iframe-test?paymentRequestToken=';
+        this.isHostedPayment = isHostedPayment;
     }
 
     preActionHandler() {
@@ -41,10 +40,15 @@ class PaymentPreAuthCommandHandler {
             commandResponse.response.paymentInfo.preAuthToken
         ) {
             let noqodiPaymentPageUrl = configuration.noqodiPaymentPage + commandResponse.response.paymentInfo.preAuthToken;
-            setTimeout(function () {
-                this.toggleTraceElement(true);
-                paymentCommands.paymentLoadIframeCommand.execute(noqodiPaymentPageUrl);
-            }.bind(this), 200);
+            if (this.isHostedPayment) {
+                window.location.href = configuration.noqodiPaymentPage + commandResponse.response.paymentInfo.preAuthToken
+                    + "&hosted=true";
+            } else {
+                setTimeout(function () {
+                    this.toggleTraceElement(true);
+                    paymentCommands.paymentLoadIframeCommand.execute(noqodiPaymentPageUrl);
+                }.bind(this), 200);
+            }
         } else {
             let noqodiPaymentPageUrl = this.testIframeUrl + 'xxx-xxxx-xxxxx-xxxxxx-xxxxxxx';
             setTimeout(function () {
@@ -89,32 +93,32 @@ class PaymentLoadIframeCommandHandler {
         }.bind(this);
 
         this.noqodiAuthResponse = function (event) {
-            let authResponseModel=JSON.parse(event.data);
+            let authResponseModel = JSON.parse(event.data);
             paymentCommands.paymentAuthResponseCommand.execute(authResponseModel);
-/*            if (event.origin === configuration.noqodiPaymentPageOrigin && event.source === noqodiPaymentIFrameContentWindow) {
-                let decodedEventData = decodeURIComponent(event.data);
-                let indexOfAuthResponse = decodedEventData.indexOf("response=");
-                let indexOfCallbackUrl = decodedEventData.indexOf("?response=");
-                if (indexOfAuthResponse > -1 && indexOfCallbackUrl > -1) {
-                    let authResponse = decodedEventData.substr(indexOfAuthResponse + 9);
-                    let callback = decodedEventData.substr(0, indexOfCallbackUrl);
-                    if (authResponse && callback === configuration.callbackUrl) {
-                        // console.log('valid auth response received ----------------');
-                        // paymentCommands.paymentAuthResponseCommand.execute(authResponse);
-                        // test only..., replace with actual auth response
+            /*            if (event.origin === configuration.noqodiPaymentPageOrigin && event.source === noqodiPaymentIFrameContentWindow) {
+                            let decodedEventData = decodeURIComponent(event.data);
+                            let indexOfAuthResponse = decodedEventData.indexOf("response=");
+                            let indexOfCallbackUrl = decodedEventData.indexOf("?response=");
+                            if (indexOfAuthResponse > -1 && indexOfCallbackUrl > -1) {
+                                let authResponse = decodedEventData.substr(indexOfAuthResponse + 9);
+                                let callback = decodedEventData.substr(0, indexOfCallbackUrl);
+                                if (authResponse && callback === configuration.callbackUrl) {
+                                    // console.log('valid auth response received ----------------');
+                                    // paymentCommands.paymentAuthResponseCommand.execute(authResponse);
+                                    // test only..., replace with actual auth response
 
-                        let authResponseModel = {
-                            serviceType: "AUTH",
-                            merchantInfo: {
-                                merchantCode: traceData.preAuth.request.merchantInfo.merchantCode,
-                                merchantOrderId: traceData.preAuth.request.merchantInfo.merchantOrderId,
-                                merchantRequestId: traceData.preAuth.request.merchantInfo.merchantRequestId
+                                    let authResponseModel = {
+                                        serviceType: "AUTH",
+                                        merchantInfo: {
+                                            merchantCode: traceData.preAuth.request.merchantInfo.merchantCode,
+                                            merchantOrderId: traceData.preAuth.request.merchantInfo.merchantOrderId,
+                                            merchantRequestId: traceData.preAuth.request.merchantInfo.merchantRequestId
+                                        }
+                                    };
+                                    paymentCommands.paymentAuthResponseCommand.execute(authResponseModel);
+                                }
                             }
-                        };
-                        paymentCommands.paymentAuthResponseCommand.execute(authResponseModel);
-                    }
-                }
-            }*/
+                        }*/
         }.bind(this);
     }
 
@@ -303,6 +307,7 @@ class TraceElementManager {
 
 
 const proceedToPaymentButton = $('#proceed-to-payment-button');
+const proceedToHostedPaymentButton = $('#proceed-to-hosted-payment-button');
 const noqodiPaymentIFrameDiv = $('#noqodi-payment-iframe-div');
 const noqodiPaymentIFrame = document.getElementById("noqodi-payment-iframe");
 const noqodiPaymentIFrameContentWindow = noqodiPaymentIFrame.contentWindow;
@@ -318,18 +323,20 @@ const voidCaptureTraceButton = $('#trace-element-capture');
 const commandResultComponent = $("#command-result-component-div");
 const commandResultComponentWrapper = $('#command-result-component-wrapper');
 
-const paymentPreAuthCommandHandler = new PaymentPreAuthCommandHandler(proceedToPaymentButton, preAuthTraceButton);
+const paymentPreAuthCommandHandler = new PaymentPreAuthCommandHandler(proceedToPaymentButton, preAuthTraceButton, false);
 const paymentLoadIframeCommandHandler = new PaymentLoadIframeCommandHandler(loadIframeTraceButton, proceedToPaymentButton);
 const paymentAuthResponseCommandHandler = new PaymentAuthResponseCommandHandler(authResponseTraceButton);
 const paymentCaptureCommandHandler = new PaymentCaptureCommandHandler(voidCaptureTraceButton);
 const paymentVoidAuthCommandHandler = new PaymentVoidAuthCommandHandler(voidCaptureTraceButton);
+const paymentLoadHostedPageCommandHandler = new PaymentPreAuthCommandHandler(proceedToPaymentButton, preAuthTraceButton, true)
 
 const paymentCommands = {
     "paymentPreAuthCommand": new PaymentPreAuthCommand(paymentPreAuthCommandHandler),
     "paymentLoadIframeCommand": new PaymentLoadIFrameCommand(paymentLoadIframeCommandHandler, iFrameManager),
     "paymentAuthResponseCommand": new PaymentAuthResponseCommand(paymentAuthResponseCommandHandler),
     "paymentCaptureCommand": new PaymentCaptureCommand(paymentCaptureCommandHandler),
-    "paymentVoidAuthCommand": new PaymentVoidAuthCommand(paymentVoidAuthCommandHandler)
+    "paymentVoidAuthCommand": new PaymentVoidAuthCommand(paymentVoidAuthCommandHandler),
+    "paymentLoadHostedPageCommand": new PaymentPreAuthCommand(paymentLoadHostedPageCommandHandler)
 };
 const traceData = {
     preAuth: null,
@@ -349,6 +356,9 @@ const traceData = {
         paymentCommands.paymentPreAuthCommand.execute(beneficiaryAmount);
     }.bind(this));
 
+    proceedToHostedPaymentButton.off().on("click", function (event) {
+        paymentCommands.paymentLoadHostedPageCommand.execute(beneficiaryAmount);
+    }.bind(this));
 
     $(document).ready(function () {
         $('#payment-command-iframe-div').on('hidden.bs.collapse', function () {
@@ -375,5 +385,9 @@ const traceData = {
     // setup trace button events
     new TraceElementManager().setup();
 
+    if (configuration.noqodiReadyData !== undefined && configuration.noqodiReadyData != '') {
+        var decoded = decodeURIComponent(configuration.noqodiReadyData);
+        paymentCommands.paymentAuthResponseCommand.execute(JSON.parse(decoded));
+    }
 
 })();
